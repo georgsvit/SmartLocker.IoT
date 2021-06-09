@@ -26,7 +26,7 @@ namespace SmartLocker.IoT.CLI
             ICommand command = null;
 
             var parserResult = this.Parser.ParseArguments<OpenCommand, CloseCommand, TakeToolCommand, ReturnToolCommand>(args)
-                .WithParsed<ICommand>(cmd => { cmd.Execute(); command = cmd; });
+                .WithParsed<ICommand>(cmd => { command = cmd; });
 
 
             return parserResult.Tag switch
@@ -57,6 +57,11 @@ namespace SmartLocker.IoT.CLI
         public void PrintViolationMsg()
         {
             Console.WriteLine("Violation was registered");
+        }
+
+        public void Print(string msg)
+        {
+            Console.WriteLine(msg);
         }
     }
 }

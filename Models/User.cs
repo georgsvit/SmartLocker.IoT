@@ -10,5 +10,11 @@ namespace SmartLocker.IoT.Models
     {
         public Guid Id { get; set; }
         public int AccessLevel { get; set; }
+
+        public User()
+        {
+            Id = Guid.Empty;
+            AccessLevel = -1;
+        }
     }
 }
