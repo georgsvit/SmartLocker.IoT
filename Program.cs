@@ -18,6 +18,7 @@ namespace SmartLocker.IoT
         static IConfiguration configuration;
         static HttpClientService httpClient;
         static Guid lockerId;
+        static bool isBlocked;
 
         static async Task Main(string[] args)
         {
@@ -29,13 +30,17 @@ namespace SmartLocker.IoT
             user = new();
             cli = new();
 
-            while (true)
+            isBlocked = await httpClient.GetConfig(lockerId);
+
+            while (!isBlocked)
             {
                 if (user.Id != Guid.Empty && user.AccessLevel != -1) cli.PrintTools(storage.GetAllTools());
 
                 ICommand command = cli.ProcessInput();
                 if (command is not null) await GeneralCommandHandler(command);
             }
+
+            cli.Print("Locker is blocked");
         }
 
         private static void InitializeConfiguration()
@@ -126,7 +131,8 @@ namespace SmartLocker.IoT
                 storage.AddAccountingNote(new(DateTime.Now, null, user.Id, tool.Id));
             }
 
-            storage.TakeTool(tool.Id);            
+            storage.TakeTool(tool.Id);
+            cli.Print("Tool was taken");
         }
 
         static async Task ReturnToolCommandHandler(ICommand command)
@@ -146,6 +152,8 @@ namespace SmartLocker.IoT
             }
 
             storage.ReturnTool(new Tool(cmd.ToolId, cmd.AccessLevel));
+
+            cli.Print("Tool was returned");
         }
     }
 }
