@@ -26,7 +26,7 @@ namespace SmartLocker.IoT.CLI
             ICommand command = null;
 
             var parserResult = this.Parser.ParseArguments<OpenCommand, CloseCommand, TakeToolCommand, ReturnToolCommand>(args)
-                .WithParsed<ICommand>(cmd => { command = cmd; });
+                .WithParsed<ICommand>(cmd => { cmd.Execute(); command = cmd; });
 
 
             return parserResult.Tag switch
