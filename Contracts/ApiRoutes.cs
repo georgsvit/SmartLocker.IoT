@@ -14,5 +14,7 @@ namespace SmartLocker.IoT.Contracts
 
         public const string ReturnTool = Base + "/accounting/return";
         public const string TakeTool = Base + "/accounting/take";
+        
+        public const string GetLockersConfig = Base + "/locker/config";
     }
 }
