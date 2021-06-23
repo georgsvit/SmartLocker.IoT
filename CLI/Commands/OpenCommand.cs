@@ -16,10 +16,7 @@ namespace SmartLocker.IoT.CLI.Commands
         [Option('a', "access", Required = true, HelpText = "User access level")]
         public int AccessLevel { get; set; }
 
-        public void Execute()
-        {
-            Console.WriteLine("Locker was opened");
-        }
+        public void Execute() { }
 
         CommandType ICommand.GetType() => CommandType.Open;
     }

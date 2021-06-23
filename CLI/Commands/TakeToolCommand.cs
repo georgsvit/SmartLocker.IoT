@@ -15,7 +15,6 @@ namespace SmartLocker.IoT.CLI.Commands
 
         public void Execute()
         {
-            Console.WriteLine("Tool was taken");
             this.ToolIdx--;
         }
 

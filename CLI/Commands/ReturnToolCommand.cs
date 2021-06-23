@@ -16,10 +16,7 @@ namespace SmartLocker.IoT.CLI.Commands
         [Option('a', "access", Required = true, HelpText = "Tool access level")]
         public int AccessLevel { get; set; }
 
-        public void Execute()
-        {
-            Console.WriteLine("Tool was returned");
-        }
+        public void Execute() { }
 
         CommandType ICommand.GetType() => CommandType.ReturnTool;
     }

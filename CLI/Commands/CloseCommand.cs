@@ -10,10 +10,7 @@ namespace SmartLocker.IoT.CLI.Commands
     [Verb("close", HelpText = "Close Locker")]
     class CloseCommand : ICommand
     {
-        public void Execute()
-        {
-            Console.WriteLine("Locker was closed");
-        }
+        public void Execute() { }
 
         CommandType ICommand.GetType() => CommandType.Close;
     }
