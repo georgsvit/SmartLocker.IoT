@@ -46,5 +46,16 @@ namespace SmartLocker.IoT.Services
             var response = await client.PostAsync(ApiRoutes.ReturnTool, data);
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<bool> GetConfig(Guid id)
+        {
+            var response = await client.GetAsync(ApiRoutes.GetLockersConfig + $"/{id}");
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            bool isBlocked = JsonConvert.DeserializeObject<bool>(content);
+
+            return isBlocked;
+        }
     }
 }
